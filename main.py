@@ -9,6 +9,7 @@ app = FastAPI()
 battles = {}
 battle_id_counter = 1
 
+
 @app.post("/battle/start")
 def start_battle(participants: list[Participant]):
     """
@@ -25,6 +26,7 @@ def start_battle(participants: list[Participant]):
     battles[battle_id] = Battle(id=battle_id, participants=participants)
     battle_id_counter += 1
     return {"battle_id": battle_id}
+
 
 @app.get("/battle/{id}")
 def get_battle(id: int):
@@ -50,8 +52,9 @@ def get_battle(id: int):
     return {
         "battle_id": battle.id,
         "participants": battle.participants,
-        "winner": battle.winner
+        "winner": battle.winner,
     }
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
